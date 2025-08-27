@@ -1,57 +1,17 @@
-// app/page.tsx  (Next.js App Router)
-// Landing page JCR Mentoria com PDF embutido + SEO/OG (metadata comentado)
+// app/page.tsx  (Next.js App Router – CLIENT)
 "use client";
 
-// import type { Metadata } from "next"; // (opcional) só descomente se for usar o export const metadata
+// import type { Metadata } from "next"; // (opcional) mantenha comentado aqui
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+
+// Import dinâmico: evita problemas de SSR
+const PdfViewer = dynamic(() => import("./components/PdfViewer"), { ssr: false });
 
 // ➤ Defina aqui a URL pública do site após publicar (ajuste quando tiver o domínio final)
 const siteUrl = "https://jcrmentoria.vercel.app"; // TODO: altere para o domínio real
-
-// export const metadata: Metadata = {
-//   metadataBase: new URL(siteUrl),
-//   title: {
-//     default: "JCR Mentoria – Mentoria Estratégica de Negócios",
-//     template: "%s | JCR Mentoria",
-//   },
-//   description:
-//     "Mentoria estratégica para transformar ideias em negócios reais. Sessão de alinhamento gratuita, mentoria 1:1 e plano estratégico.",
-//   alternates: {
-//     canonical: siteUrl,
-//   },
-//   openGraph: {
-//     type: "website",
-//     url: siteUrl,
-//     siteName: "JCR Mentoria",
-//     title: "JCR Mentoria – Mentoria Estratégica de Negócios",
-//     description:
-//       "Estratégia, modelo de negócio e plano de ação para empreendedores. Atuação no Brasil, Chile e Uruguai.",
-//     images: [
-//       {
-//         url: "/og-jcr.jpg", // 1200x630 – salve em /public
-//         width: 1200,
-//         height: 630,
-//         alt: "JCR Mentoria – Judith da Cunha",
-//       },
-//     ],
-//     locale: "pt_BR",
-//   },
-//   twitter: {
-//     card: "summary_large_image",
-//     title: "JCR Mentoria – Mentoria Estratégica de Negócios",
-//     description:
-//       "Sessão de alinhamento gratuita, mentoria 1:1 e plano estratégico para empreendedores.",
-//     images: ["/og-jcr.jpg"],
-//     creator: "@jcrmentoria",
-//   },
-//   icons: {
-//     icon: "/favicon.ico",
-//     shortcut: "/favicon.ico",
-//     apple: "/apple-touch-icon.png",
-//   },
-// };
 
 export default function Page() {
   const [scrolled, setScrolled] = useState(false);
@@ -64,7 +24,7 @@ export default function Page() {
   const whatsapp = "https://wa.me/5511999384816";
   const instagram = "https://www.instagram.com/jcrmentoria/";
 
-  // ⇩⇩⇩ USE O PDF AQUI (coloque seu arquivo em /public)
+  // ⇩⇩⇩ caminho do PDF em /public
   const pdfSrc = "/apresentacao.pdf";
 
   // JSON-LD – Organization/Person
@@ -135,13 +95,7 @@ export default function Page() {
             <a href="#portfolio" className="hover:opacity-80">Apresentação</a>
             <a href="#contato" className="hover:opacity-80">Contato</a>
 
-            <Link
-              href={whatsapp}
-              className="ml-2 rounded-2xl px-4 py-2 text-white shadow-md hover:shadow-lg transition"
-              style={{ backgroundColor: "#1f1f1f" }}
-            >
-              Fale no WhatsApp
-            </Link>
+
           </nav>
         </div>
       </header>
@@ -232,7 +186,7 @@ export default function Page() {
         <div className="mx-auto max-w-7xl px-4 grid md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-5">
             <div className="rounded-[1.5rem] bg-white shadow-md p-2">
-              <Image src="/image.png" alt="Judith da Cunha – Mentora" width={900} height={1200} className="rounded-[1.25rem]" />
+              <Image src="/judith.jpg" alt="Judith da Cunha – Mentora" width={900} height={1200} className="rounded-[1.25rem]" />
             </div>
           </div>
           <div className="md:col-span-7">
@@ -277,33 +231,15 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Apresentação (PDF embed) */}
+      {/* Apresentação (PDF – viewer bonito) */}
       <section id="portfolio" className="py-20 bg-white/70">
         <div className="mx-auto max-w-7xl px-4">
           <h2 className="text-3xl md:text-4xl font-semibold mb-6">Apresentação</h2>
           <p className="text-[#3a3a3a] max-w-3xl mb-6">
-            Explore o material de apresentação da JCR Mentoria diretamente aqui no site.
+            Veja a apresentação completa da JCR Mentoria, com detalhes sobre minha trajetória, serviços e metodologia de trabalho.
           </p>
 
-          <div className="rounded-2xl overflow-hidden shadow-lg border border-[#f0e2e4]">
-            {/* Tenta exibir via <object>; se não der, cai no <iframe> */}
-            <object data={pdfSrc} type="application/pdf" className="w-full h-[760px]">
-              <iframe src={pdfSrc} className="w-full h-[760px]" title="Apresentação JCR Mentoria (PDF)" />
-            </object>
-          </div>
-
-          <div className="mt-4 flex flex-wrap gap-3">
-            <a
-              href={pdfSrc}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-xl px-5 py-3 font-medium shadow-sm hover:shadow transition"
-              style={{ backgroundColor: "#1f1f1f", color: "white" }}
-            >
-              Abrir em nova aba
-            </a>
-            
-          </div>
+          <PdfViewer src={pdfSrc} />
         </div>
       </section>
 
