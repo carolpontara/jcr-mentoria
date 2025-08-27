@@ -215,7 +215,7 @@ export default function Page() {
           <p className="mt-3 text-[#3a3a3a] max-w-3xl">Mentoria individual e programas para empreendedores que desejam estruturar, validar e crescer seus negócios.</p>
           <div className="mt-10 grid md:grid-cols-3 gap-6">
             {[
-              { title: "Sessão de Alinhamento (free)", desc: "Conversa inicial para entender seu momento e traçar próximos passos.", cta: "Agendar no WhatsApp", href: whatsapp },
+              { title: "Sessão de Alinhamento", desc: "Conversa inicial para entender seu momento e traçar próximos passos.", cta: "Agendar no WhatsApp", href: whatsapp },
               { title: "Mentoria 1:1", desc: "Acompanhamento personalizado: diagnóstico, plano de ação e métricas.", cta: "Quero saber mais", href: whatsapp },
               { title: "Plano Estratégico", desc: "Do posicionamento ao calendário de execução – foco em resultados.", cta: "Solicitar proposta", href: whatsapp },
             ].map((s, i) => (
