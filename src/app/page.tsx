@@ -186,7 +186,7 @@ export default function Page() {
         <div className="mx-auto max-w-7xl px-4 grid md:grid-cols-12 gap-10 items-center">
           <div className="md:col-span-5">
             <div className="rounded-[1.5rem] bg-white shadow-md p-2">
-              <Image src="/judith.jpg" alt="Judith da Cunha – Mentora" width={900} height={1200} className="rounded-[1.25rem]" />
+              <Image src="/image.jpg" alt="Judith da Cunha – Mentora" width={900} height={1200} className="rounded-[1.25rem]" />
             </div>
           </div>
           <div className="md:col-span-7">
